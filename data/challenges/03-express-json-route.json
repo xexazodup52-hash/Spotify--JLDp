@@ -1,0 +1,35 @@
+{
+  "id": "03-express-json-route",
+  "level": 3,
+  "title": "Respond with JSON",
+  "category": "backend",
+  "categoryLabel": "Node.js",
+  "points": 200,
+  "description": "Welcome to Rank Challenge. This Express route returns data with `res.send(...)`, which sends it as a plain string and omits the JSON content-type.\n\nChange the handler to reply with `res.json(...)` so clients receive a proper JSON response. Remove the `res.send` call.",
+  "objectives": [
+    "Reply using `res.json(...)`",
+    "Remove the `res.send` call"
+  ],
+  "hints": [
+    "`res.json(obj)` serializes the object and sets `Content-Type: application/json`.",
+    "Replace `res.send(user)` with `res.json(user)`."
+  ],
+  "hintPenalty": 15,
+  "validationType": "backend-parse",
+  "files": [
+    {
+      "filename": "express-json-route.js",
+      "language": "javascript",
+      "editable": true,
+      "content": "const express = require('express');\nconst app = express();\n\napp.get('/user', (req, res) => {\n  const user = { id: 1, name: 'Rank Challenger' };\n  res.send(user);\n});\n\nmodule.exports = app;\n"
+    }
+  ],
+  "validation": {
+    "parseRules": [
+      { "rule": "uses-res-json", "failMessage": "Reply with `res.json(...)`." },
+      { "rule": "no-string", "value": "res.send", "failMessage": "Remove the `res.send` call." }
+    ]
+  },
+  "previewConfig": { "type": "console" },
+  "unlockRequires": [ "02-fs-read-async" ]
+}

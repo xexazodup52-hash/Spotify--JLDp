@@ -1,0 +1,35 @@
+{
+  "id": "08-streams-pipe",
+  "level": 8,
+  "title": "Stream with pipe",
+  "category": "backend",
+  "categoryLabel": "Node.js",
+  "points": 350,
+  "description": "Welcome to Rank Challenge. This copy function reads an entire file into memory with `readFileSync` and writes it back out. For large files that exhausts memory.\n\nReplace it with a stream: create a read stream with `fs.createReadStream` and `.pipe(` it into the write stream. Streams move data in chunks without buffering the whole file.",
+  "objectives": [
+    "Create a read stream with `fs.createReadStream`",
+    "Pipe it to the destination with `.pipe(...)`"
+  ],
+  "hints": [
+    "`fs.createReadStream(src)` returns a readable stream.",
+    "`fs.createReadStream(src).pipe(fs.createWriteStream(dest))` copies chunk by chunk."
+  ],
+  "hintPenalty": 15,
+  "validationType": "backend-parse",
+  "files": [
+    {
+      "filename": "streams-pipe.js",
+      "language": "javascript",
+      "editable": true,
+      "content": "const fs = require('fs');\n\nfunction copy(src, dest) {\n  const data = fs.readFileSync(src);\n  fs.writeFileSync(dest, data);\n}\n\nmodule.exports = copy;\n"
+    }
+  ],
+  "validation": {
+    "parseRules": [
+      { "rule": "contains-string", "value": "createReadStream", "failMessage": "Create a read stream with `fs.createReadStream`.", "passMessage": "Creates a read stream." },
+      { "rule": "contains-string", "value": ".pipe(", "failMessage": "Pipe the stream to the destination with `.pipe(...)`.", "passMessage": "Pipes the stream." }
+    ]
+  },
+  "previewConfig": { "type": "console" },
+  "unlockRequires": [ "07-env-config" ]
+}

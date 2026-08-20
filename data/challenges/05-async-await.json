@@ -1,0 +1,36 @@
+{
+  "id": "05-async-await",
+  "level": 5,
+  "title": "Callbacks to async/await",
+  "category": "backend",
+  "categoryLabel": "Node.js",
+  "points": 250,
+  "description": "Welcome to Rank Challenge. This function fetches a record using the old callback style with `(err, data) =>`. Callback nesting is hard to read and easy to get wrong.\n\nRefactor it into an `async` function that `await`s the promise-based `db.find(id)`. Remove the callback-style call entirely.",
+  "objectives": [
+    "Make the function `async`",
+    "Use `await db.find(id)` instead of the callback"
+  ],
+  "hints": [
+    "Mark the function `async` and `await` the promise returned by `db.find(id)`.",
+    "Delete the `(err, data) =>` callback argument; the awaited value is the data."
+  ],
+  "hintPenalty": 15,
+  "validationType": "backend-parse",
+  "files": [
+    {
+      "filename": "async-await.js",
+      "language": "javascript",
+      "editable": true,
+      "content": "const db = require('./db');\n\nfunction getRecord(id) {\n  db.find(id, (err, data) => {\n    if (err) throw err;\n    return data;\n  });\n}\n\nmodule.exports = getRecord;\n"
+    }
+  ],
+  "validation": {
+    "parseRules": [
+      { "rule": "contains-string", "value": "async", "failMessage": "Make the function `async`.", "passMessage": "Function is async." },
+      { "rule": "contains-string", "value": "await", "failMessage": "Use `await` on the promise.", "passMessage": "Awaits the promise." },
+      { "rule": "no-string", "value": "(err, data)", "failMessage": "Remove the `(err, data)` callback." }
+    ]
+  },
+  "previewConfig": { "type": "console" },
+  "unlockRequires": [ "04-parse-body" ]
+}

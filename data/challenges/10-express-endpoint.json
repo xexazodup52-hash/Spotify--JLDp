@@ -1,0 +1,37 @@
+{
+  "id": "10-express-endpoint",
+  "level": 10,
+  "title": "Complete the Endpoint",
+  "category": "backend",
+  "categoryLabel": "Node.js",
+  "points": 400,
+  "description": "Welcome to Rank Challenge. The finale. This Express route loads a user from the database and returns it, but it is missing everything that makes a route robust.\n\nMake the handler `async`, wrap the awaited `db.getUser(id)` in a `try/catch`, and reply with `res.json(...)`. The starter currently uses a synchronous lookup and `res.send`.",
+  "objectives": [
+    "Make the route handler `async`",
+    "Wrap the await in a `try/catch`",
+    "Reply with `res.json(...)`"
+  ],
+  "hints": [
+    "An async handler can `await db.getUser(id)`; wrap it in `try/catch` to handle rejection.",
+    "On success call `res.json(user)`; in `catch` send an error status."
+  ],
+  "hintPenalty": 15,
+  "validationType": "backend-parse",
+  "files": [
+    {
+      "filename": "express-endpoint.js",
+      "language": "javascript",
+      "editable": true,
+      "content": "const express = require('express');\nconst db = require('./db');\nconst app = express();\n\napp.get('/user/:id', (req, res) => {\n  const user = db.getUserSync(req.params.id);\n  res.send(user);\n});\n\nmodule.exports = app;\n"
+    }
+  ],
+  "validation": {
+    "parseRules": [
+      { "rule": "contains-string", "value": "async", "failMessage": "Make the handler `async`.", "passMessage": "Handler is async." },
+      { "rule": "has-try-catch", "failMessage": "Wrap the await in a `try/catch`." },
+      { "rule": "uses-res-json", "failMessage": "Reply with `res.json(...)`." }
+    ]
+  },
+  "previewConfig": { "type": "console" },
+  "unlockRequires": [ "09-event-emitter" ]
+}

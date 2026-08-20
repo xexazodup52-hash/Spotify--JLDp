@@ -1,0 +1,35 @@
+{
+  "id": "06-try-catch",
+  "level": 6,
+  "title": "Handle Async Errors",
+  "category": "backend",
+  "categoryLabel": "Node.js",
+  "points": 300,
+  "description": "Welcome to Rank Challenge. This async function awaits a network call, but if it rejects the whole process crashes with an unhandled rejection.\n\nWrap the `await` in a `try/catch` block so failures are caught and logged instead of crashing.",
+  "objectives": [
+    "Wrap the `await` call in a `try { } catch { }`",
+    "Keep awaiting `fetchData()` inside the try"
+  ],
+  "hints": [
+    "A `try/catch` around an `await` catches promise rejections like synchronous errors.",
+    "Put `const data = await fetchData();` inside `try` and log the error in `catch`."
+  ],
+  "hintPenalty": 15,
+  "validationType": "backend-parse",
+  "files": [
+    {
+      "filename": "try-catch.js",
+      "language": "javascript",
+      "editable": true,
+      "content": "const fetchData = require('./fetchData');\n\nasync function load() {\n  const data = await fetchData();\n  return data;\n}\n\nmodule.exports = load;\n"
+    }
+  ],
+  "validation": {
+    "parseRules": [
+      { "rule": "has-try-catch", "failMessage": "Wrap the await in a `try/catch`." },
+      { "rule": "contains-string", "value": "await", "failMessage": "Keep awaiting `fetchData()` inside the try.", "passMessage": "Still awaits the call." }
+    ]
+  },
+  "previewConfig": { "type": "console" },
+  "unlockRequires": [ "05-async-await" ]
+}

@@ -1,0 +1,36 @@
+{
+  "id": "09-event-emitter",
+  "level": 9,
+  "title": "Wire up an EventEmitter",
+  "category": "backend",
+  "categoryLabel": "Node.js",
+  "points": 350,
+  "description": "Welcome to Rank Challenge. This module is supposed to react to a `ping` event, but it never creates an emitter, never registers a listener, and never emits.\n\nUse the `events` module: create an `EventEmitter`, register a handler with `.on('ping', ...)`, and trigger it with `.emit('ping')`.",
+  "objectives": [
+    "Create an `EventEmitter`",
+    "Register a listener with `.on(...)` and fire it with `.emit(...)`"
+  ],
+  "hints": [
+    "`const { EventEmitter } = require('events');` then `const bus = new EventEmitter();`.",
+    "`bus.on('ping', () => {...})` registers a listener; `bus.emit('ping')` triggers it."
+  ],
+  "hintPenalty": 15,
+  "validationType": "backend-parse",
+  "files": [
+    {
+      "filename": "event-emitter.js",
+      "language": "javascript",
+      "editable": true,
+      "content": "// TODO: require the events module and create an emitter\n\nfunction start() {\n  // TODO: register a 'ping' listener, then emit 'ping'\n}\n\nmodule.exports = start;\n"
+    }
+  ],
+  "validation": {
+    "parseRules": [
+      { "rule": "contains-string", "value": "EventEmitter", "failMessage": "Create an `EventEmitter` from the `events` module.", "passMessage": "Uses EventEmitter." },
+      { "rule": "contains-string", "value": ".on(", "failMessage": "Register a listener with `.on(...)`.", "passMessage": "Registers a listener." },
+      { "rule": "contains-string", "value": ".emit(", "failMessage": "Trigger the event with `.emit(...)`.", "passMessage": "Emits the event." }
+    ]
+  },
+  "previewConfig": { "type": "console" },
+  "unlockRequires": [ "08-streams-pipe" ]
+}

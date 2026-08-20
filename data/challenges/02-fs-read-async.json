@@ -1,0 +1,36 @@
+{
+  "id": "02-fs-read-async",
+  "level": 2,
+  "title": "Read a File Asynchronously",
+  "category": "backend",
+  "categoryLabel": "Node.js",
+  "points": 150,
+  "description": "Welcome to Rank Challenge. This function reads `data.txt`, but it uses the blocking `readFileSync`, which freezes the event loop.\n\nRewrite it to use the promise-based API from `fs/promises` and `await readFile`, so the read happens without blocking. Remove the synchronous call entirely.",
+  "objectives": [
+    "Import `readFile` from `fs/promises`",
+    "Use `await readFile(...)` instead of `readFileSync`"
+  ],
+  "hints": [
+    "`const { readFile } = require('fs/promises');` gives you the async version.",
+    "`await readFile('data.txt', 'utf8')` returns the file contents as a string."
+  ],
+  "hintPenalty": 15,
+  "validationType": "backend-parse",
+  "files": [
+    {
+      "filename": "fs-read-async.js",
+      "language": "javascript",
+      "editable": true,
+      "content": "const fs = require('fs');\n\nfunction loadData() {\n  const text = fs.readFileSync('data.txt', 'utf8');\n  return text;\n}\n\nmodule.exports = loadData;\n"
+    }
+  ],
+  "validation": {
+    "parseRules": [
+      { "rule": "contains-string", "value": "fs/promises", "failMessage": "Require the promise API: `require('fs/promises')`.", "passMessage": "Uses fs/promises." },
+      { "rule": "contains-string", "value": "await", "failMessage": "Await the async read.", "passMessage": "Awaits the read." },
+      { "rule": "no-string", "value": "readFileSync", "failMessage": "Remove the blocking `readFileSync` call." }
+    ]
+  },
+  "previewConfig": { "type": "console" },
+  "unlockRequires": [ "01-module-exports" ]
+}

@@ -1,0 +1,36 @@
+{
+  "id": "07-env-config",
+  "level": 7,
+  "title": "Config from Environment",
+  "category": "backend",
+  "categoryLabel": "Node.js",
+  "points": 300,
+  "description": "Welcome to Rank Challenge. This module hardcodes the server port as `3000`. Hardcoded config can't change between environments and may leak into source control.\n\nRead the port from `process.env.PORT` with a fallback to a default using `||`. Remove the bare hardcoded `3000` literal assignment.",
+  "objectives": [
+    "Read `process.env.PORT`",
+    "Provide a fallback with `||`"
+  ],
+  "hints": [
+    "Environment variables live on `process.env`.",
+    "`const port = process.env.PORT || 8080;` reads the env var and falls back."
+  ],
+  "hintPenalty": 15,
+  "validationType": "backend-parse",
+  "files": [
+    {
+      "filename": "env-config.js",
+      "language": "javascript",
+      "editable": true,
+      "content": "const port = 3000;\n\nfunction getPort() {\n  return port;\n}\n\nmodule.exports = getPort;\n"
+    }
+  ],
+  "validation": {
+    "parseRules": [
+      { "rule": "contains-string", "value": "process.env.PORT", "failMessage": "Read the port from `process.env.PORT`.", "passMessage": "Reads process.env.PORT." },
+      { "rule": "contains-string", "value": "process.env.PORT ||", "failMessage": "Add a fallback with `process.env.PORT || ...`.", "passMessage": "Has a fallback." },
+      { "rule": "no-string", "value": "= 3000", "failMessage": "Remove the hardcoded `= 3000` assignment." }
+    ]
+  },
+  "previewConfig": { "type": "console" },
+  "unlockRequires": [ "06-try-catch" ]
+}

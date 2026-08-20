@@ -1,0 +1,35 @@
+{
+  "id": "04-parse-body",
+  "level": 4,
+  "title": "Read the Request Body",
+  "category": "backend",
+  "categoryLabel": "Node.js",
+  "points": 250,
+  "description": "Welcome to Rank Challenge. This POST handler should greet whoever was submitted in the JSON body, but it ignores the request entirely and hardcodes a name.\n\nRead the `username` field from `req.body` and use it in the response. The `express.json()` middleware has already populated `req.body`.",
+  "objectives": [
+    "Read `req.body.username` from the request",
+    "Use that value in the JSON response"
+  ],
+  "hints": [
+    "With `express.json()` enabled, the parsed JSON payload is on `req.body`.",
+    "Access the field with `req.body.username`."
+  ],
+  "hintPenalty": 15,
+  "validationType": "backend-parse",
+  "files": [
+    {
+      "filename": "parse-body.js",
+      "language": "javascript",
+      "editable": true,
+      "content": "const express = require('express');\nconst app = express();\napp.use(express.json());\n\napp.post('/hello', (req, res) => {\n  const username = 'anonymous';\n  res.json({ message: `Hello, ${username}!` });\n});\n\nmodule.exports = app;\n"
+    }
+  ],
+  "validation": {
+    "parseRules": [
+      { "rule": "contains-string", "value": "req.body", "failMessage": "Read the parsed payload from `req.body`.", "passMessage": "Reads req.body." },
+      { "rule": "contains-string", "value": "req.body.username", "failMessage": "Access the `username` field: `req.body.username`.", "passMessage": "Uses the username field." }
+    ]
+  },
+  "previewConfig": { "type": "console" },
+  "unlockRequires": [ "03-express-json-route" ]
+}

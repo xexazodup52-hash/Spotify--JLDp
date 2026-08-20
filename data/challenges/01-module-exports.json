@@ -1,0 +1,35 @@
+{
+  "id": "01-module-exports",
+  "level": 1,
+  "title": "Export a Module",
+  "category": "backend",
+  "categoryLabel": "Node.js",
+  "points": 100,
+  "description": "Welcome to Rank Challenge. This module defines a `greet` function, but it never exports it, so `require('./greet')` returns an empty object.\n\nIn CommonJS, a module only exposes what you attach to `module.exports`. Add a line that exports the `greet` function so other files can use it.",
+  "objectives": [
+    "Define a function named `greet`",
+    "Export it with `module.exports = greet`"
+  ],
+  "hints": [
+    "Node uses CommonJS by default. Whatever you assign to `module.exports` is what `require()` returns.",
+    "Add `module.exports = greet;` at the bottom of the file."
+  ],
+  "hintPenalty": 15,
+  "validationType": "backend-parse",
+  "files": [
+    {
+      "filename": "greet.js",
+      "language": "javascript",
+      "editable": true,
+      "content": "function greet(name) {\n  return `Hello, ${name}!`;\n}\n\n// TODO: export greet so other modules can require it\n"
+    }
+  ],
+  "validation": {
+    "parseRules": [
+      { "rule": "contains-string", "value": "module.exports", "failMessage": "Use `module.exports` to export the function.", "passMessage": "Module exports something." },
+      { "rule": "contains-string", "value": "greet", "failMessage": "The exported function must be named `greet`.", "passMessage": "Exports greet." }
+    ]
+  },
+  "previewConfig": { "type": "console" },
+  "unlockRequires": []
+}
